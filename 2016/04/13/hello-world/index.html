@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="theme-next use-motion theme-next-mist">
+<html class="theme-next use-motion theme-next-pisces">
 <head>
   
 
@@ -11,6 +11,8 @@
 
 
 
+
+    <meta name="description" content="Hello World, The summer ice cream" />
 
 
 
@@ -41,7 +43,7 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
 
 
-  <title> Hello World - Hexo </title>
+  <title> Hello World - HJ </title>
 </head>
 
 <body>
@@ -92,7 +94,7 @@
       <span class="logo">
         <i class="icon-logo"></i>
       </span>
-      <span class="site-title">Hexo</span>
+      <span class="site-title">HJ</span>
   </a>
   <span class="logo-line-after"><i></i></span>
 </h1>
@@ -115,7 +117,7 @@
         <li class="menu-item menu-item-about">
         <a href="/about">
           <i class="menu-item-icon icon-about"></i> <br />
-          About
+          关于
         </a>
       </li>
       
@@ -125,7 +127,7 @@
         <li class="menu-item menu-item-tags">
         <a href="/tags">
           <i class="menu-item-icon icon-tags"></i> <br />
-          Tags
+          标签
         </a>
       </li>
       
@@ -135,7 +137,7 @@
         <li class="menu-item menu-item-categories">
         <a href="/categories">
           <i class="menu-item-icon icon-categories"></i> <br />
-          Categories
+          分类
         </a>
       </li>
       
@@ -145,7 +147,7 @@
         <li class="menu-item menu-item-archives">
         <a href="/archives">
           <i class="menu-item-icon icon-archives"></i> <br />
-          Archives
+          归档
         </a>
       </li>
       
@@ -198,7 +200,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-13
+          发表于 2016-04-13
         </span>
 
         
@@ -276,39 +278,39 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table Of Contents
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+            站点概览
           </li>
         </ul>
       
 
       <div class="site-overview">
         <div class="site-author motion-element">
-          <img class="site-author-image" src="/xirong.jpg" alt="John Doe" />
-          <p class="site-author-name">John Doe</p>
+          <img class="site-author-image" src="/xirong.jpg" alt="hj" />
+          <p class="site-author-name">hj</p>
         </div>
-        <p class="site-description motion-element"></p>
+        <p class="site-description motion-element">The summer ice cream</p>
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">1</span>
-              <span class="site-state-item-name">posts</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">categories</span>
+              <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">tags</span>
+              <span class="site-state-item-name">标签</span>
               </a>
           </div>
         </div>
@@ -351,7 +353,7 @@
   &copy; &nbsp; 
   2016
   
-  <span class="author"> John Doe</span>
+  <span class="author"> hj</span>
 </div>
 
 <div class="powered-by">
@@ -361,11 +363,11 @@
    鲁ICP备15013969号
 </div>
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a> 
 </div>
 
 <div class="theme-info">
-  Theme 
+  Clone theme 
   <a class="theme-link" href="https://github.com/xirong/hexo-theme-next" rel="external nofollow">
     NexT
   </a>
@@ -506,9 +508,6 @@ $(function(){
       $.Velocity.RunSequence([
         { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
         { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
-        
-        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
-        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
         
         { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
       ]);
