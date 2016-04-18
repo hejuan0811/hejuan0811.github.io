@@ -120,16 +120,6 @@
     
       
       
-        <li class="menu-item menu-item-about">
-        <a href="/about">
-          <i class="menu-item-icon icon-about"></i> <br />
-          关于
-        </a>
-      </li>
-      
-    
-      
-      
         <li class="menu-item menu-item-tags">
         <a href="/tags">
           <i class="menu-item-icon icon-tags"></i> <br />
@@ -140,30 +130,10 @@
     
       
       
-        <li class="menu-item menu-item-categories">
-        <a href="/categories">
-          <i class="menu-item-icon icon-categories"></i> <br />
-          分类
-        </a>
-      </li>
-      
-    
-      
-      
         <li class="menu-item menu-item-archives">
         <a href="/archives">
           <i class="menu-item-icon icon-archives"></i> <br />
           归档
-        </a>
-      </li>
-      
-    
-      
-      
-        <li class="menu-item menu-item-commonweal" style="display:none;">
-        <a href="/404.html">
-          <i class="menu-item-icon icon-commonweal"></i> <br />
-          公益404
         </a>
       </li>
       
@@ -232,10 +202,10 @@
           </div>
 
           <div class="site-state-item site-state-categories">
-            <a href="/categories">
+            
               <span class="site-state-item-count">0</span>
               <span class="site-state-item-name">分类</span>
-              </a>
+              
           </div>
 
           <div class="site-state-item site-state-tags">
@@ -512,7 +482,7 @@ $(function(){
   
 
    <script type="text/javascript">
-    var HEXO_SIDEBAR_CONFIGURATION = 'hide';
+    var HEXO_SIDEBAR_CONFIGURATION = '[object Object]';
     $(document).ready(function () {
       if (HEXO_SIDEBAR_CONFIGURATION === 'always') {
         displaySidebar();
