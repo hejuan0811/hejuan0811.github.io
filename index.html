@@ -259,8 +259,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/05/05/jsp/hibernate在eclipse和myeclipse中的配置/" itemprop="url">
-                  hibernate在eclipse和myeclipse中的配置
+                <a class="post-title-link" href="/2016/05/06/jsp/Hibernate一对多实例/" itemprop="url">
+                  Hibernate一对多实例
                 </a>
               
             
@@ -273,8 +273,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-05T00:00:00+08:00" content="2016-05-05">
-              2016-05-05
+            <time itemprop="dateCreated" datetime="2016-05-06T00:00:00+08:00" content="2016-05-06">
+              2016-05-06
             </time>
           </span>
 
@@ -303,8 +303,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/05/jsp/hibernate在eclipse和myeclipse中的配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/05/jsp/hibernate在eclipse和myeclipse中的配置/" itemprop="commentsCount"></span>
+                <a href="/2016/05/06/jsp/Hibernate一对多实例/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/06/jsp/Hibernate一对多实例/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -328,21 +328,167 @@
 
       
         
-          <h3 id="hibernate配置文件"><a href="#hibernate配置文件" class="headerlink" title="hibernate配置文件"></a>hibernate配置文件</h3><p>在eclipse中需要手工添加hibernate的jar包<br>因为myeclipse已经进行了配置，加入了jar包，不需要手工配置</p>
-<h4 id="eclipse具体操作如下："><a href="#eclipse具体操作如下：" class="headerlink" title="eclipse具体操作如下："></a>eclipse具体操作如下：</h4><ul>
-<li>加入hibernate的核心jar包<br>下载<a href="http://7xt4eq.com2.z0.glb.clouddn.com/mysql.rar">hibernate核心包</a></li>
-<li>加入数据库mysql包<br>下载<a href="http://7xt4eq.com2.z0.glb.clouddn.com/mysql.rar">mysql.jar</a><br>加入的hibernate的核心jar包和数据库mysql包如下图所示：<br><img src="http://7xt4eq.com2.z0.glb.clouddn.com/hibernate1.png" alt=""></li>
-<li><p>随便将一个hibernate.cfg.xml添加进工程，再修改该xml文件中的内容即可，hibernate.cfg.xml配置文件的具体如下图：<br>下载<a href="http://7xt4eq.com2.z0.glb.clouddn.com/hibernate.cfg.xml">hibernate.cfg.xml</a><br><img src="http://7xt4eq.com2.z0.glb.clouddn.com/hibernate2.png" alt=""> </p>
-<h4 id="myeclipse正向配置具体操作如下："><a href="#myeclipse正向配置具体操作如下：" class="headerlink" title="myeclipse正向配置具体操作如下："></a>myeclipse正向配置具体操作如下：</h4></li>
-<li>点击数据库视图<br><img src="http://7xt4eq.com2.z0.glb.clouddn.com/hibernate11.png" alt=""></li>
-<li>新建连接驱动<br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-5hibernate18.png" alt=""><br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-5hibernate12.png" alt="enter description here"></li>
-<li>右击工程，按照下图即可配置<br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/hibernate3.png" alt=""></li>
-<li>添加包<br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-5hibernate13.png" alt=""></li>
-<li>配置文件<br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-5hibernate14.png" alt=""></li>
-<li>添加驱动<br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-5hibernate15.png" alt=""></li>
-<li>HibernateSessionFactory<br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-5hibernate16.png" alt=""><br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-5hibernate17.png" alt="">
+          <h4 id="工程"><a href="#工程" class="headerlink" title="工程"></a>工程</h4><ul>
+<li>关于学生和班级的关系，一个班级对应多个学生，一个学生对应一个班级，建立两个持久化类班级和学生<h4 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h4>在myeclipse中配置，可查看我的一篇文章关于hibernate在myeclipse中配置，<br>注意配置时本工程和上一篇配置文档一样。<br><a href="http://hj-zwj.win/2016/05/05/jsp/hibernate%E5%9C%A8eclipse%E5%92%8Cmyeclipse%E4%B8%AD%E7%9A%84%E9%85%8D%E7%BD%AE/">hibernate在eclipse和myeclipse中的配置</a></li>
+</ul>
+<h4 id="具体代码讲解"><a href="#具体代码讲解" class="headerlink" title="具体代码讲解"></a>具体代码讲解</h4><p><a href="http://7xt4eq.com1.z0.glb.clouddn.com/hibernate3.rar">源码下载</a></p>
+<ul>
+<li><p>配置后修改hibernate.cfg.xml代码，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE hibernate-configuration PUBLIC</span><br><span class="line">        <span class="string">"-//Hibernate/Hibernate Configuration DTD 3.0//EN"</span></span><br><span class="line">        <span class="string">"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;hibernate-configuration&gt;</span><br><span class="line">    &lt;session-factory&gt;</span><br><span class="line">   		 &lt;!-- 数据库方言 --&gt;</span><br><span class="line">        &lt;property name="hibernate.dialect"&gt;org.hibernate.dialect.MySQLDialect&lt;/property&gt;</span><br><span class="line">        &lt;!-- 数据库驱动 --&gt;</span><br><span class="line">        &lt;property name="hibernate.connection.driver_class"&gt;com.mysql.jdbc.Driver&lt;/property&gt;</span><br><span class="line">        &lt;!-- 数据库用户名 --&gt;</span><br><span class="line">        &lt;property name="hibernate.connection.username"&gt;root&lt;/property&gt;</span><br><span class="line">        &lt;!-- 数据库密码 --&gt;</span><br><span class="line">        &lt;property name="hibernate.connection.password"&gt;&lt;/property&gt;</span><br><span class="line">        &lt;!-- 数据库连接，其中student为数据库名字 --&gt;</span><br><span class="line">        &lt;property name="hibernate.connection.url"&gt;</span><br><span class="line">        	&lt;![CDATA[</span><br><span class="line">        		jdbc:mysql://localhost:3306/student?useUnicode=true&amp;characterEncoding=utf8</span><br><span class="line">        	]]&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property name="show_sql"&gt;true&lt;/property&gt;</span><br><span class="line">        &lt;property name="hbm2ddl.auto"&gt;update&lt;/property&gt;</span><br><span class="line">    &lt;/session-factory&gt;</span><br><span class="line">&lt;/hibernate-configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置后会自动生成HibernateSessionFactory.java，用于直接获取session对象<br>如下图，介绍了hibernate的执行流程<br><img src="http://7xt4eq.com2.z0.glb.clouddn.com/2016-5-6-3.png" alt=""><br>HibernateSessionFactory.java文件中代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line">package com.hj.util;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.HibernateException;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.Session;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.cfg.Configuration;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Configures and provides access to Hibernate sessions, tied to the</span><br><span class="line"> * current thread of execution.  Follows the Thread Local Session</span><br><span class="line"> * pattern, see &#123;@link http://hibernate.org/42.html &#125;.</span><br><span class="line"> */</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">HibernateSessionFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** </span><br><span class="line">     * Location of hibernate.cfg.xml file.</span><br><span class="line">     * Location should be on the classpath as Hibernate uses  </span><br><span class="line">     * #resourceAsStream style lookup for its configuration file. </span><br><span class="line">     * The default classpath location of the hibernate config file is </span><br><span class="line">     * in the default package. Use #setConfigFile() to update </span><br><span class="line">     * the location of the configuration file for the current session.   </span><br><span class="line">     */</span></span><br><span class="line">    private <span class="keyword">static</span> <span class="built_in">String</span> CONFIG_FILE_LOCATION = <span class="string">"/hibernate.cfg.xml"</span>;</span><br><span class="line">	private <span class="keyword">static</span> final ThreadLocal&lt;Session&gt; threadLocal = <span class="keyword">new</span> ThreadLocal&lt;Session&gt;();</span><br><span class="line">    private  <span class="keyword">static</span> Configuration configuration = <span class="keyword">new</span> Configuration();    </span><br><span class="line">    private <span class="keyword">static</span> org.hibernate.SessionFactory sessionFactory;</span><br><span class="line">    private <span class="keyword">static</span> <span class="built_in">String</span> configFile = CONFIG_FILE_LOCATION;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">    	<span class="keyword">try</span> &#123;</span><br><span class="line">			configuration.configure(configFile);</span><br><span class="line">			sessionFactory = configuration.buildSessionFactory();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			System.err</span><br><span class="line">					.println(<span class="string">"%%%% Error Creating SessionFactory %%%%"</span>);</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    private HibernateSessionFactory() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span><br><span class="line">     * Returns the ThreadLocal Session instance.  Lazy initialize</span><br><span class="line">     * the &lt;code&gt;SessionFactory&lt;/code&gt; if needed.</span><br><span class="line">     *</span><br><span class="line">     *  @return Session</span><br><span class="line">     *  @throws HibernateException</span><br><span class="line">     */</span></span><br><span class="line">    public <span class="keyword">static</span> Session getSession() throws HibernateException &#123;</span><br><span class="line">        Session session = (Session) threadLocal.get();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (session == <span class="literal">null</span> || !session.isOpen()) &#123;</span><br><span class="line">			<span class="keyword">if</span> (sessionFactory == <span class="literal">null</span>) &#123;</span><br><span class="line">				rebuildSessionFactory();</span><br><span class="line">			&#125;</span><br><span class="line">			session = (sessionFactory != <span class="literal">null</span>) ? sessionFactory.openSession()</span><br><span class="line">					: <span class="literal">null</span>;</span><br><span class="line">			threadLocal.set(session);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> session;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">     *  Rebuild hibernate session factory</span><br><span class="line">     *</span><br><span class="line">     */</span></span><br><span class="line">	public <span class="keyword">static</span> <span class="keyword">void</span> rebuildSessionFactory() &#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			configuration.configure(configFile);</span><br><span class="line">			sessionFactory = configuration.buildSessionFactory();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			System.err</span><br><span class="line">					.println(<span class="string">"%%%% Error Creating SessionFactory %%%%"</span>);</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">     *  Close the single hibernate session instance.</span><br><span class="line">     *</span><br><span class="line">     *  @throws HibernateException</span><br><span class="line">     */</span></span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> closeSession() throws HibernateException &#123;</span><br><span class="line">        Session session = (Session) threadLocal.get();</span><br><span class="line">        threadLocal.set(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (session != <span class="literal">null</span>) &#123;</span><br><span class="line">            session.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">     *  return session factory</span><br><span class="line">     *</span><br><span class="line">     */</span></span><br><span class="line">	public <span class="keyword">static</span> org.hibernate.SessionFactory getSessionFactory() &#123;</span><br><span class="line">		<span class="keyword">return</span> sessionFactory;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">     *  return session factory</span><br><span class="line">     *</span><br><span class="line">     *	session factory will be rebuilded in the next call</span><br><span class="line">     */</span></span><br><span class="line">	public <span class="keyword">static</span> <span class="keyword">void</span> setConfigFile(<span class="built_in">String</span> configFile) &#123;</span><br><span class="line">		HibernateSessionFactory.configFile = configFile;</span><br><span class="line">		sessionFactory = <span class="literal">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">     *  return hibernate configuration</span><br><span class="line">     *</span><br><span class="line">     */</span></span><br><span class="line">	public <span class="keyword">static</span> Configuration getConfiguration() &#123;</span><br><span class="line">		<span class="keyword">return</span> configuration;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立两个持久化类，学生Student.java和班级Grade.java</p>
+</li>
+<li><p>Student.java：Serializable使之序列化，适合建表时主键自动增长，因为在学生类来说，一个学生对应一个相应的班级，添加一个属性grade引入Grade这个持久化类</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">package com.hj.entity;</span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="title">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">	private int sid;</span><br><span class="line">	private <span class="built_in">String</span> sname;</span><br><span class="line">	private <span class="built_in">String</span> sex;</span><br><span class="line">	<span class="comment">//在多方定义一个一方的引用</span></span><br><span class="line">	private Grade grade;</span><br><span class="line"></span><br><span class="line">	public Grade getGrade() &#123;</span><br><span class="line">		<span class="keyword">return</span> grade;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setGrade(Grade grade) &#123;</span><br><span class="line">		<span class="keyword">this</span>.grade = grade;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public int getSid() &#123;</span><br><span class="line">		<span class="keyword">return</span> sid;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setSid(int sid) &#123;</span><br><span class="line">		<span class="keyword">this</span>.sid = sid;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="built_in">String</span> getSname() &#123;</span><br><span class="line">		<span class="keyword">return</span> sname;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setSname(<span class="built_in">String</span> sname) &#123;</span><br><span class="line">		<span class="keyword">this</span>.sname = sname;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="built_in">String</span> getSex() &#123;</span><br><span class="line">		<span class="keyword">return</span> sex;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setSex(<span class="built_in">String</span> sex) &#123;</span><br><span class="line">		<span class="keyword">this</span>.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Student() &#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Student(<span class="built_in">String</span> sname, <span class="built_in">String</span> sex) &#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.sname = sname;</span><br><span class="line">		<span class="keyword">this</span>.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Grade.java:Serializable使之序列化，适合建表时主键自动增长，因为在学生类来说，一个班级对应一个相应的学生，添加一 个学生集合Set<Student> students引入学生这个持久化类</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Grade</span> <span class="title">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">	private int gid;</span><br><span class="line">	private <span class="built_in">String</span> gname;</span><br><span class="line">	private <span class="built_in">String</span> gdesc;</span><br><span class="line">	<span class="comment">//一个班级对应多个学生，故用集合，set集合不允许重复</span></span><br><span class="line">	private <span class="built_in">Set</span>&lt;Student&gt; students;</span><br><span class="line"></span><br><span class="line">	public int getGid() &#123;</span><br><span class="line">		<span class="keyword">return</span> gid;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setGid(int gid) &#123;</span><br><span class="line">		<span class="keyword">this</span>.gid = gid;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="built_in">String</span> getGname() &#123;</span><br><span class="line">		<span class="keyword">return</span> gname;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setGname(<span class="built_in">String</span> gname) &#123;</span><br><span class="line">		<span class="keyword">this</span>.gname = gname;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="built_in">String</span> getGdesc() &#123;</span><br><span class="line">		<span class="keyword">return</span> gdesc;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setGdesc(<span class="built_in">String</span> gdesc) &#123;</span><br><span class="line">		<span class="keyword">this</span>.gdesc = gdesc;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Grade() &#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="built_in">Set</span>&lt;Student&gt; getStudents() &#123;</span><br><span class="line">		<span class="keyword">return</span> students;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setStudents(<span class="built_in">Set</span>&lt;Student&gt; students) &#123;</span><br><span class="line">		<span class="keyword">this</span>.students = students;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Grade(int gid, <span class="built_in">String</span> gname, <span class="built_in">String</span> gdesc) &#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.gid = gid;</span><br><span class="line">		<span class="keyword">this</span>.gname = gname;</span><br><span class="line">		<span class="keyword">this</span>.gdesc = gdesc;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Grade(<span class="built_in">String</span> gname, <span class="built_in">String</span> gdesc) &#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.gname = gname;</span><br><span class="line">		<span class="keyword">this</span>.gdesc = gdesc;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在工程中右键new 一个file，输入名字比如为student.sql，可以预先在里面写入建表语句，在这个工程中建表语句如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">create table grade</span><br><span class="line">(</span><br><span class="line">	gid int primary key,</span><br><span class="line">	gname varchar(<span class="number">20</span>) not <span class="literal">null</span>,</span><br><span class="line">	gdesc varchar(<span class="number">50</span>)</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br><span class="line">create table stu</span><br><span class="line">(</span><br><span class="line">	sid int primary key,</span><br><span class="line">	sname varchar(<span class="number">20</span>) not <span class="literal">null</span>,</span><br><span class="line">	sex char(<span class="number">2</span>),</span><br><span class="line">	gid int</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br><span class="line">alter table stu add constraint fk_student_gid foreign key (gid) references grade(gid);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>映射文件中属性name对应持久化类的属性明称，column对应的是数据库中表的列名，type为数据类型</p>
+</li>
+<li><p>Student持久化类的映射Student.hbm.xml，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span>?&gt;</span><br><span class="line">&lt;!DOCTYPE hibernate-mapping PUBLIC </span><br><span class="line">	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span><br><span class="line">	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;</span><br><span class="line">&lt;hibernate-mapping&gt;</span><br><span class="line">	&lt;class name="com.hj.entity.Student" table="stu"&gt;</span><br><span class="line">		&lt;id name="sid" column="sid" type="java.lang.Integer"&gt;</span><br><span class="line">			&lt;generator class="increment"&gt;&lt;/generator&gt;</span><br><span class="line">		&lt;/id&gt;</span><br><span class="line">		&lt;property name="sname" type="java.lang.String"&gt;</span><br><span class="line">			&lt;column name="sname" length="20" not-null="true"&gt;&lt;/column&gt;</span><br><span class="line">		&lt;/property&gt;</span><br><span class="line">		&lt;property name="sex"&gt;</span><br><span class="line">			&lt;column name="sex"&gt;&lt;/column&gt;</span><br><span class="line">		&lt;/property&gt;</span><br><span class="line">		&lt;!-- 配置多对一关联关系 --&gt;</span><br><span class="line">		&lt;many-to-one name="grade" class="com.hj.entity.Grade" column="gid" cascade="all"&gt;&lt;/many-to-one&gt;</span><br><span class="line">	&lt;/class&gt;</span><br><span class="line">&lt;/hibernate-mapping&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Grade持久化类的映射Grade.hbm.xml代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span>?&gt;</span><br><span class="line">&lt;!DOCTYPE hibernate-mapping PUBLIC </span><br><span class="line">	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span><br><span class="line">	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;</span><br><span class="line">&lt;hibernate-mapping&gt;</span><br><span class="line">	&lt;class name="com.hj.entity.Grade" table="grade"&gt;</span><br><span class="line">		&lt;id name="gid" column="gid" type="java.lang.Integer"&gt;</span><br><span class="line">			&lt;generator class="increment"&gt;&lt;/generator&gt;&lt;!-- 自动增长 --&gt;</span><br><span class="line">		&lt;/id&gt;</span><br><span class="line">		&lt;property name="gname" type="java.lang.String"&gt;</span><br><span class="line">			&lt;column name="gname" length="20" not-null="true"&gt;&lt;/column&gt;</span><br><span class="line">		&lt;/property&gt;</span><br><span class="line">		&lt;property name="gdesc"&gt;</span><br><span class="line">			&lt;column name="gdesc"&gt;&lt;/column&gt;</span><br><span class="line">		&lt;/property&gt;</span><br><span class="line">		&lt;!-- 配置一对多关联关系 --&gt;</span><br><span class="line">		&lt;set name="students" table="stu"&gt;</span><br><span class="line">			&lt;key column="gid"&gt;&lt;/key&gt;</span><br><span class="line">			&lt;one-to-many class="com.hj.entity.Student"/&gt;</span><br><span class="line">		&lt;/set&gt;</span><br><span class="line">	&lt;/class&gt;</span><br><span class="line">&lt;/hibernate-mapping&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后一步，在配置文件hibernate.cfg.xml中加入映射文件，代码如下：<br><img src="http://7xt4eq.com2.z0.glb.clouddn.com/2016-5-6-4.png" alt=""></p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/05/jsp/hibernate在eclipse和myeclipse中的配置/#more" rel="contents">
+            <a class="btn" href="/2016/05/06/jsp/Hibernate一对多实例/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/06/jsp/解决hibernate在不联网或者网很差的情况下不能解析文件/" itemprop="url">
+                  解决hibernate在不联网或者网很差的情况下不能解析文件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-06T00:00:00+08:00" content="2016-05-06">
+              2016-05-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/jsp/" itemprop="url" rel="index">
+                    <span itemprop="name">jsp</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/06/jsp/解决hibernate在不联网或者网很差的情况下不能解析文件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/06/jsp/解决hibernate在不联网或者网很差的情况下不能解析文件/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="抛出的异常"><a href="#抛出的异常" class="headerlink" title="抛出的异常"></a>抛出的异常</h4> <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread "main" org.hibernate.HibernateException: Could not parse configuration: /hibernate.cfg.xml</span><br><span class="line">at org.hibernate.cfg.Configuration.doConfigure(Configuration.java:1418)</span><br><span class="line">at org.hibernate.cfg.Configuration.configure(Configuration.java:1352)</span><br><span class="line">at org.hibernate.cfg.Configuration.configure(Configuration.java:1338)</span><br><span class="line">at org.wjp.hibernate.ExportDB.main(ExportDB.java:8)</span><br><span class="line">Caused by: org.dom4j.DocumentException: www.hibernate.org Nested exception: www.hibernate.org</span><br><span class="line">at org.dom4j.io.SAXReader.read(SAXReader.java:484)</span><br><span class="line">at org.hibernate.cfg.Configuration.doConfigure(Configuration.java:1408)</span><br></pre></td></tr></table></figure>
+<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p>hibernate.cfg.xml配置文件中和映射文件XX.hbm.xml文件中解析需要到http:……的网站找XX.dtd文件，所以网不好或者网断了，就会抛出异常，不能进行解析<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">'1.0'</span> encoding=<span class="string">'UTF-8'</span>?&gt;</span><br><span class="line">&lt;!DOCTYPE hibernate-configuration PUBLIC</span><br><span class="line">          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"</span><br><span class="line">          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd" &gt;</span><br></pre></td></tr></table></figure></p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span><br><span class="line">"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><p>在工程建一个文件夹，比如名为dtd的文件夹，在dtd文件加入hibernate-configuration-3.0.dtd和hibernate-mapping-3.0.dtd<br><a href="http://7xt4eq.com2.z0.glb.clouddn.com/hibernate-configuration-3.0.rar">hibernate-configuration-3.0.dtd下载</a><br><a href="http://7xt4eq.com2.z0.glb.clouddn.com/hibernate-mapping-3.0.rar">hibernate-mapping-3.0.dtd下载</a><br>修改hibernate.cfg.xml文件和XX.hbm.xml的代码，如下</p>
+<ul>
+<li>hibernate.cfg.xml<br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-6-5.png" alt="enter description here"></li>
+<li>XX.hbm.xml<br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-6-6.png" alt="enter description here">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/06/jsp/解决hibernate在不联网或者网很差的情况下不能解析文件/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -475,6 +621,140 @@
 <hr>
 
           
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/05/jsp/hibernate在eclipse和myeclipse中的配置/" itemprop="url">
+                  hibernate在eclipse和myeclipse中的配置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-05T00:00:00+08:00" content="2016-05-05">
+              2016-05-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/jsp/" itemprop="url" rel="index">
+                    <span itemprop="name">jsp</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/05/jsp/hibernate在eclipse和myeclipse中的配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/05/jsp/hibernate在eclipse和myeclipse中的配置/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="hibernate配置文件"><a href="#hibernate配置文件" class="headerlink" title="hibernate配置文件"></a>hibernate配置文件</h3><p>在eclipse中需要手工添加hibernate的jar包<br>因为myeclipse已经进行了配置，加入了jar包，不需要手工配置</p>
+<h4 id="eclipse具体操作如下："><a href="#eclipse具体操作如下：" class="headerlink" title="eclipse具体操作如下："></a>eclipse具体操作如下：</h4><ul>
+<li>加入hibernate的核心jar包<br>下载<a href="http://7xt4eq.com2.z0.glb.clouddn.com/mysql.rar">hibernate核心包</a></li>
+<li>加入数据库mysql包<br>下载<a href="http://7xt4eq.com2.z0.glb.clouddn.com/mysql.rar">mysql.jar</a><br>加入的hibernate的核心jar包和数据库mysql包如下图所示：<br><img src="http://7xt4eq.com2.z0.glb.clouddn.com/hibernate1.png" alt=""></li>
+<li><p>随便将一个hibernate.cfg.xml添加进工程，再修改该xml文件中的内容即可，hibernate.cfg.xml配置文件的具体如下图：<br>下载<a href="http://7xt4eq.com2.z0.glb.clouddn.com/hibernate.cfg.xml">hibernate.cfg.xml</a><br><img src="http://7xt4eq.com2.z0.glb.clouddn.com/hibernate2.png" alt=""> </p>
+<h4 id="myeclipse正向配置具体操作如下："><a href="#myeclipse正向配置具体操作如下：" class="headerlink" title="myeclipse正向配置具体操作如下："></a>myeclipse正向配置具体操作如下：</h4></li>
+<li>点击数据库视图<br><img src="http://7xt4eq.com2.z0.glb.clouddn.com/hibernate11.png" alt=""></li>
+<li>新建连接驱动<br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-5hibernate18.png" alt=""><br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-5hibernate12.png" alt="enter description here"></li>
+<li>右击工程，按照下图即可配置<br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/hibernate3.png" alt=""></li>
+<li>添加包<br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-5hibernate13.png" alt=""></li>
+<li>配置文件<br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-5hibernate14.png" alt=""></li>
+<li>添加驱动<br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-5hibernate15.png" alt=""></li>
+<li>HibernateSessionFactory<br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-5hibernate16.png" alt=""><br><img src="http://7xt4eq.com1.z0.glb.clouddn.com/2016-5-5hibernate17.png" alt="">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/05/jsp/hibernate在eclipse和myeclipse中的配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -808,7 +1088,7 @@ if (img != null &amp;&amp; img.getSize() &gt; 0) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

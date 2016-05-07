@@ -1,0 +1,724 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="jsp," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="工程
+关于学生和班级的关系，一个班级对应多个学生，一个学生对应一个班级，建立两个持久化类班级和学生配置环境在myeclipse中配置，可查看我的一篇文章关于hibernate在myeclipse中配置，注意配置时本工程和上一篇配置文档一样。hibernate在eclipse和myeclipse中的配置
+
+具体代码讲解源码下载
+
+配置后修改hibernate.cfg.xml代码，如下：
+123456">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hibernate一对多实例">
+<meta property="og:url" content="http://yoursite.com/2016/05/06/jsp/Hibernate一对多实例/index.html">
+<meta property="og:site_name" content="沐沐的朗朗">
+<meta property="og:description" content="工程
+关于学生和班级的关系，一个班级对应多个学生，一个学生对应一个班级，建立两个持久化类班级和学生配置环境在myeclipse中配置，可查看我的一篇文章关于hibernate在myeclipse中配置，注意配置时本工程和上一篇配置文档一样。hibernate在eclipse和myeclipse中的配置
+
+具体代码讲解源码下载
+
+配置后修改hibernate.cfg.xml代码，如下：
+123456">
+<meta property="og:image" content="http://7xt4eq.com2.z0.glb.clouddn.com/2016-5-6-3.png">
+<meta property="og:image" content="http://7xt4eq.com2.z0.glb.clouddn.com/2016-5-6-4.png">
+<meta property="og:updated_time" content="2016-05-06T08:29:59.741Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hibernate一对多实例">
+<meta name="twitter:description" content="工程
+关于学生和班级的关系，一个班级对应多个学生，一个学生对应一个班级，建立两个持久化类班级和学生配置环境在myeclipse中配置，可查看我的一篇文章关于hibernate在myeclipse中配置，注意配置时本工程和上一篇配置文档一样。hibernate在eclipse和myeclipse中的配置
+
+具体代码讲解源码下载
+
+配置后修改hibernate.cfg.xml代码，如下：
+123456">
+<meta name="twitter:image" content="http://7xt4eq.com2.z0.glb.clouddn.com/2016-5-6-3.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Hibernate一对多实例 | 沐沐的朗朗 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?33d221b6e5ff565a133e464eecbe3dd5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">沐沐的朗朗</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Hibernate一对多实例
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-06T00:00:00+08:00" content="2016-05-06">
+              2016-05-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/jsp/" itemprop="url" rel="index">
+                    <span itemprop="name">jsp</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/06/jsp/Hibernate一对多实例/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/06/jsp/Hibernate一对多实例/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="工程"><a href="#工程" class="headerlink" title="工程"></a>工程</h4><ul>
+<li>关于学生和班级的关系，一个班级对应多个学生，一个学生对应一个班级，建立两个持久化类班级和学生<h4 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h4>在myeclipse中配置，可查看我的一篇文章关于hibernate在myeclipse中配置，<br>注意配置时本工程和上一篇配置文档一样。<br><a href="http://hj-zwj.win/2016/05/05/jsp/hibernate%E5%9C%A8eclipse%E5%92%8Cmyeclipse%E4%B8%AD%E7%9A%84%E9%85%8D%E7%BD%AE/" target="_blank" rel="external">hibernate在eclipse和myeclipse中的配置</a></li>
+</ul>
+<h4 id="具体代码讲解"><a href="#具体代码讲解" class="headerlink" title="具体代码讲解"></a>具体代码讲解</h4><p><a href="http://7xt4eq.com1.z0.glb.clouddn.com/hibernate3.rar" target="_blank" rel="external">源码下载</a></p>
+<ul>
+<li><p>配置后修改hibernate.cfg.xml代码，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE hibernate-configuration PUBLIC</span><br><span class="line">        <span class="string">"-//Hibernate/Hibernate Configuration DTD 3.0//EN"</span></span><br><span class="line">        <span class="string">"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;hibernate-configuration&gt;</span><br><span class="line">    &lt;session-factory&gt;</span><br><span class="line">   		 &lt;!-- 数据库方言 --&gt;</span><br><span class="line">        &lt;property name="hibernate.dialect"&gt;org.hibernate.dialect.MySQLDialect&lt;/property&gt;</span><br><span class="line">        &lt;!-- 数据库驱动 --&gt;</span><br><span class="line">        &lt;property name="hibernate.connection.driver_class"&gt;com.mysql.jdbc.Driver&lt;/property&gt;</span><br><span class="line">        &lt;!-- 数据库用户名 --&gt;</span><br><span class="line">        &lt;property name="hibernate.connection.username"&gt;root&lt;/property&gt;</span><br><span class="line">        &lt;!-- 数据库密码 --&gt;</span><br><span class="line">        &lt;property name="hibernate.connection.password"&gt;&lt;/property&gt;</span><br><span class="line">        &lt;!-- 数据库连接，其中student为数据库名字 --&gt;</span><br><span class="line">        &lt;property name="hibernate.connection.url"&gt;</span><br><span class="line">        	&lt;![CDATA[</span><br><span class="line">        		jdbc:mysql://localhost:3306/student?useUnicode=true&amp;characterEncoding=utf8</span><br><span class="line">        	]]&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property name="show_sql"&gt;true&lt;/property&gt;</span><br><span class="line">        &lt;property name="hbm2ddl.auto"&gt;update&lt;/property&gt;</span><br><span class="line">    &lt;/session-factory&gt;</span><br><span class="line">&lt;/hibernate-configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置后会自动生成HibernateSessionFactory.java，用于直接获取session对象<br>如下图，介绍了hibernate的执行流程<br><img src="http://7xt4eq.com2.z0.glb.clouddn.com/2016-5-6-3.png" alt=""><br>HibernateSessionFactory.java文件中代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line">package com.hj.util;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.HibernateException;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.Session;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.cfg.Configuration;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Configures and provides access to Hibernate sessions, tied to the</span><br><span class="line"> * current thread of execution.  Follows the Thread Local Session</span><br><span class="line"> * pattern, see &#123;@link http://hibernate.org/42.html &#125;.</span><br><span class="line"> */</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">HibernateSessionFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** </span><br><span class="line">     * Location of hibernate.cfg.xml file.</span><br><span class="line">     * Location should be on the classpath as Hibernate uses  </span><br><span class="line">     * #resourceAsStream style lookup for its configuration file. </span><br><span class="line">     * The default classpath location of the hibernate config file is </span><br><span class="line">     * in the default package. Use #setConfigFile() to update </span><br><span class="line">     * the location of the configuration file for the current session.   </span><br><span class="line">     */</span></span><br><span class="line">    private <span class="keyword">static</span> <span class="built_in">String</span> CONFIG_FILE_LOCATION = <span class="string">"/hibernate.cfg.xml"</span>;</span><br><span class="line">	private <span class="keyword">static</span> final ThreadLocal&lt;Session&gt; threadLocal = <span class="keyword">new</span> ThreadLocal&lt;Session&gt;();</span><br><span class="line">    private  <span class="keyword">static</span> Configuration configuration = <span class="keyword">new</span> Configuration();    </span><br><span class="line">    private <span class="keyword">static</span> org.hibernate.SessionFactory sessionFactory;</span><br><span class="line">    private <span class="keyword">static</span> <span class="built_in">String</span> configFile = CONFIG_FILE_LOCATION;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">    	<span class="keyword">try</span> &#123;</span><br><span class="line">			configuration.configure(configFile);</span><br><span class="line">			sessionFactory = configuration.buildSessionFactory();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			System.err</span><br><span class="line">					.println(<span class="string">"%%%% Error Creating SessionFactory %%%%"</span>);</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    private HibernateSessionFactory() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span><br><span class="line">     * Returns the ThreadLocal Session instance.  Lazy initialize</span><br><span class="line">     * the &lt;code&gt;SessionFactory&lt;/code&gt; if needed.</span><br><span class="line">     *</span><br><span class="line">     *  @return Session</span><br><span class="line">     *  @throws HibernateException</span><br><span class="line">     */</span></span><br><span class="line">    public <span class="keyword">static</span> Session getSession() throws HibernateException &#123;</span><br><span class="line">        Session session = (Session) threadLocal.get();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (session == <span class="literal">null</span> || !session.isOpen()) &#123;</span><br><span class="line">			<span class="keyword">if</span> (sessionFactory == <span class="literal">null</span>) &#123;</span><br><span class="line">				rebuildSessionFactory();</span><br><span class="line">			&#125;</span><br><span class="line">			session = (sessionFactory != <span class="literal">null</span>) ? sessionFactory.openSession()</span><br><span class="line">					: <span class="literal">null</span>;</span><br><span class="line">			threadLocal.set(session);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> session;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">     *  Rebuild hibernate session factory</span><br><span class="line">     *</span><br><span class="line">     */</span></span><br><span class="line">	public <span class="keyword">static</span> <span class="keyword">void</span> rebuildSessionFactory() &#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			configuration.configure(configFile);</span><br><span class="line">			sessionFactory = configuration.buildSessionFactory();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			System.err</span><br><span class="line">					.println(<span class="string">"%%%% Error Creating SessionFactory %%%%"</span>);</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">     *  Close the single hibernate session instance.</span><br><span class="line">     *</span><br><span class="line">     *  @throws HibernateException</span><br><span class="line">     */</span></span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> closeSession() throws HibernateException &#123;</span><br><span class="line">        Session session = (Session) threadLocal.get();</span><br><span class="line">        threadLocal.set(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (session != <span class="literal">null</span>) &#123;</span><br><span class="line">            session.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">     *  return session factory</span><br><span class="line">     *</span><br><span class="line">     */</span></span><br><span class="line">	public <span class="keyword">static</span> org.hibernate.SessionFactory getSessionFactory() &#123;</span><br><span class="line">		<span class="keyword">return</span> sessionFactory;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">     *  return session factory</span><br><span class="line">     *</span><br><span class="line">     *	session factory will be rebuilded in the next call</span><br><span class="line">     */</span></span><br><span class="line">	public <span class="keyword">static</span> <span class="keyword">void</span> setConfigFile(<span class="built_in">String</span> configFile) &#123;</span><br><span class="line">		HibernateSessionFactory.configFile = configFile;</span><br><span class="line">		sessionFactory = <span class="literal">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">     *  return hibernate configuration</span><br><span class="line">     *</span><br><span class="line">     */</span></span><br><span class="line">	public <span class="keyword">static</span> Configuration getConfiguration() &#123;</span><br><span class="line">		<span class="keyword">return</span> configuration;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立两个持久化类，学生Student.java和班级Grade.java</p>
+</li>
+<li><p>Student.java：Serializable使之序列化，适合建表时主键自动增长，因为在学生类来说，一个学生对应一个相应的班级，添加一个属性grade引入Grade这个持久化类</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">package com.hj.entity;</span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="title">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">	private int sid;</span><br><span class="line">	private <span class="built_in">String</span> sname;</span><br><span class="line">	private <span class="built_in">String</span> sex;</span><br><span class="line">	<span class="comment">//在多方定义一个一方的引用</span></span><br><span class="line">	private Grade grade;</span><br><span class="line"></span><br><span class="line">	public Grade getGrade() &#123;</span><br><span class="line">		<span class="keyword">return</span> grade;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setGrade(Grade grade) &#123;</span><br><span class="line">		<span class="keyword">this</span>.grade = grade;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public int getSid() &#123;</span><br><span class="line">		<span class="keyword">return</span> sid;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setSid(int sid) &#123;</span><br><span class="line">		<span class="keyword">this</span>.sid = sid;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="built_in">String</span> getSname() &#123;</span><br><span class="line">		<span class="keyword">return</span> sname;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setSname(<span class="built_in">String</span> sname) &#123;</span><br><span class="line">		<span class="keyword">this</span>.sname = sname;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="built_in">String</span> getSex() &#123;</span><br><span class="line">		<span class="keyword">return</span> sex;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setSex(<span class="built_in">String</span> sex) &#123;</span><br><span class="line">		<span class="keyword">this</span>.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Student() &#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Student(<span class="built_in">String</span> sname, <span class="built_in">String</span> sex) &#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.sname = sname;</span><br><span class="line">		<span class="keyword">this</span>.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Grade.java:Serializable使之序列化，适合建表时主键自动增长，因为在学生类来说，一个班级对应一个相应的学生，添加一 个学生集合Set<student> students引入学生这个持久化类</student></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Grade</span> <span class="title">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">	private int gid;</span><br><span class="line">	private <span class="built_in">String</span> gname;</span><br><span class="line">	private <span class="built_in">String</span> gdesc;</span><br><span class="line">	<span class="comment">//一个班级对应多个学生，故用集合，set集合不允许重复</span></span><br><span class="line">	private <span class="built_in">Set</span>&lt;Student&gt; students;</span><br><span class="line"></span><br><span class="line">	public int getGid() &#123;</span><br><span class="line">		<span class="keyword">return</span> gid;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setGid(int gid) &#123;</span><br><span class="line">		<span class="keyword">this</span>.gid = gid;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="built_in">String</span> getGname() &#123;</span><br><span class="line">		<span class="keyword">return</span> gname;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setGname(<span class="built_in">String</span> gname) &#123;</span><br><span class="line">		<span class="keyword">this</span>.gname = gname;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="built_in">String</span> getGdesc() &#123;</span><br><span class="line">		<span class="keyword">return</span> gdesc;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setGdesc(<span class="built_in">String</span> gdesc) &#123;</span><br><span class="line">		<span class="keyword">this</span>.gdesc = gdesc;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Grade() &#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="built_in">Set</span>&lt;Student&gt; getStudents() &#123;</span><br><span class="line">		<span class="keyword">return</span> students;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public <span class="keyword">void</span> setStudents(<span class="built_in">Set</span>&lt;Student&gt; students) &#123;</span><br><span class="line">		<span class="keyword">this</span>.students = students;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Grade(int gid, <span class="built_in">String</span> gname, <span class="built_in">String</span> gdesc) &#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.gid = gid;</span><br><span class="line">		<span class="keyword">this</span>.gname = gname;</span><br><span class="line">		<span class="keyword">this</span>.gdesc = gdesc;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Grade(<span class="built_in">String</span> gname, <span class="built_in">String</span> gdesc) &#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.gname = gname;</span><br><span class="line">		<span class="keyword">this</span>.gdesc = gdesc;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在工程中右键new 一个file，输入名字比如为student.sql，可以预先在里面写入建表语句，在这个工程中建表语句如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">create table grade</span><br><span class="line">(</span><br><span class="line">	gid int primary key,</span><br><span class="line">	gname varchar(<span class="number">20</span>) not <span class="literal">null</span>,</span><br><span class="line">	gdesc varchar(<span class="number">50</span>)</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br><span class="line">create table stu</span><br><span class="line">(</span><br><span class="line">	sid int primary key,</span><br><span class="line">	sname varchar(<span class="number">20</span>) not <span class="literal">null</span>,</span><br><span class="line">	sex char(<span class="number">2</span>),</span><br><span class="line">	gid int</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br><span class="line">alter table stu add constraint fk_student_gid foreign key (gid) references grade(gid);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>映射文件中属性name对应持久化类的属性明称，column对应的是数据库中表的列名，type为数据类型</p>
+</li>
+<li><p>Student持久化类的映射Student.hbm.xml，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span>?&gt;</span><br><span class="line">&lt;!DOCTYPE hibernate-mapping PUBLIC </span><br><span class="line">	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span><br><span class="line">	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;</span><br><span class="line">&lt;hibernate-mapping&gt;</span><br><span class="line">	&lt;class name="com.hj.entity.Student" table="stu"&gt;</span><br><span class="line">		&lt;id name="sid" column="sid" type="java.lang.Integer"&gt;</span><br><span class="line">			&lt;generator class="increment"&gt;&lt;/generator&gt;</span><br><span class="line">		&lt;/id&gt;</span><br><span class="line">		&lt;property name="sname" type="java.lang.String"&gt;</span><br><span class="line">			&lt;column name="sname" length="20" not-null="true"&gt;&lt;/column&gt;</span><br><span class="line">		&lt;/property&gt;</span><br><span class="line">		&lt;property name="sex"&gt;</span><br><span class="line">			&lt;column name="sex"&gt;&lt;/column&gt;</span><br><span class="line">		&lt;/property&gt;</span><br><span class="line">		&lt;!-- 配置多对一关联关系 --&gt;</span><br><span class="line">		&lt;many-to-one name="grade" class="com.hj.entity.Grade" column="gid" cascade="all"&gt;&lt;/many-to-one&gt;</span><br><span class="line">	&lt;/class&gt;</span><br><span class="line">&lt;/hibernate-mapping&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Grade持久化类的映射Grade.hbm.xml代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span>?&gt;</span><br><span class="line">&lt;!DOCTYPE hibernate-mapping PUBLIC </span><br><span class="line">	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span><br><span class="line">	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;</span><br><span class="line">&lt;hibernate-mapping&gt;</span><br><span class="line">	&lt;class name="com.hj.entity.Grade" table="grade"&gt;</span><br><span class="line">		&lt;id name="gid" column="gid" type="java.lang.Integer"&gt;</span><br><span class="line">			&lt;generator class="increment"&gt;&lt;/generator&gt;&lt;!-- 自动增长 --&gt;</span><br><span class="line">		&lt;/id&gt;</span><br><span class="line">		&lt;property name="gname" type="java.lang.String"&gt;</span><br><span class="line">			&lt;column name="gname" length="20" not-null="true"&gt;&lt;/column&gt;</span><br><span class="line">		&lt;/property&gt;</span><br><span class="line">		&lt;property name="gdesc"&gt;</span><br><span class="line">			&lt;column name="gdesc"&gt;&lt;/column&gt;</span><br><span class="line">		&lt;/property&gt;</span><br><span class="line">		&lt;!-- 配置一对多关联关系 --&gt;</span><br><span class="line">		&lt;set name="students" table="stu"&gt;</span><br><span class="line">			&lt;key column="gid"&gt;&lt;/key&gt;</span><br><span class="line">			&lt;one-to-many class="com.hj.entity.Student"/&gt;</span><br><span class="line">		&lt;/set&gt;</span><br><span class="line">	&lt;/class&gt;</span><br><span class="line">&lt;/hibernate-mapping&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后一步，在配置文件hibernate.cfg.xml中加入映射文件，代码如下：<br><img src="http://7xt4eq.com2.z0.glb.clouddn.com/2016-5-6-4.png" alt=""></p>
+<a id="more"></a> 
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://7xt4eq.com2.z0.glb.clouddn.com/weixin.jpg" alt="沐沐的朗朗 WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://7xt4eq.com2.z0.glb.clouddn.com/zhifubao.png" alt="沐沐的朗朗 Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jsp/" rel="tag">#jsp</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/06/jsp/解决hibernate在不联网或者网很差的情况下不能解析文件/" rel="next" title="解决hibernate在不联网或者网很差的情况下不能解析文件">
+                <i class="fa fa-chevron-left"></i> 解决hibernate在不联网或者网很差的情况下不能解析文件
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/06/jsp/Hibernate一对多实例/"
+           data-title="Hibernate一对多实例" data-url="http://yoursite.com/2016/05/06/jsp/Hibernate一对多实例/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xt4eq.com2.z0.glb.clouddn.com/haha.png"
+               alt="沐沐的朗朗" />
+          <p class="site-author-name" itemprop="name">沐沐的朗朗</p>
+          <p class="site-description motion-element" itemprop="description">The summer ice cream</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://shenshanlaoyuan.com/" title="师傅" target="_blank">师傅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#工程"><span class="nav-number">1.</span> <span class="nav-text">工程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置环境"><span class="nav-number">2.</span> <span class="nav-text">配置环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体代码讲解"><span class="nav-number">3.</span> <span class="nav-text">具体代码讲解</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沐沐的朗朗</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hjzwj"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
